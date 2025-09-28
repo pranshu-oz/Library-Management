@@ -5,13 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/book")
-public class BookController {
+@RequestMapping("loans")
+public class LoanController {
 
 	@GetMapping("")
-	public String showBooks() {
+	public String showStatus() {
 		
-		return "book";
+		return "loans";
 	}
 	
+	@GetMapping("/reports")
+	public String showReports() {
+		
+		return "reports";
+	}
 }
