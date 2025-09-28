@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/index :: head}">
+</head>
+
+<body>
+
+    <!--defining the header-->
+    <header th:replace="~{layout/index :: header}">
+
+    </header>
+
+    <!--defining the sidebar and main content area-->
+    <div class="d-flex">
+
+        <!--sidebar area-->
+        <div th:replace="~{layout/index :: sidebar}">
+
+        </div>
+        <!--main content area-->
+        <div class="flex-grow-1 p-4 bg-light">
+            <h4 class="p-3">Borrow</h4>
+            <div class="container border bg-white" style="height: 325px; border-radius: 10px;">
+                <div class="row mt-4">
+                    <!--Borrow Tab-->
+                    <div class="col-4 container" style="height: 300px;">
+                        <h5>Borrow</h5>
+                        <form class="p-3">
+                            <div class="mb-3">
+                                <label for="memberId" class="form-label">Member ID</label>
+                                <input type="text" class="form-control" id="memberId" placeholder="Enter Member ID">
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookId" class="form-label">Book ID</label>
+                                <input type="text" class="form-control" id="bookId" placeholder="Enter Book ID">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Borrow Book</button>
+                        </form>
+                    </div>
+
+                    <!--Active Loan tab-->
+                    <div class="col-8 container" style="height: 300px">
+                        <h5>Active Loan</h5>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Loan ID</th>
+                                    <th>User</th>
+                                    <th>Book</th>
+                                    <th>Issue</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>101</td>
+                                    <td>202</td>
+                                    <td>2024-06-01</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-success">Return</button>
+                                    </td>
+                                </tr>
+                                <!-- More rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <h4 class="m-3">Return</h4>
+            <form class="p-3">
+                <div class="mb-3 row">
+                    <div class="col">
+                        <label for="returnLoanId" class="form-label">Loan Id</label>
+                        <input type="text" class="form-control" id="returnLoanId" placeholder="Enter Loan ID">
+                    </div>
+                    <div class="col align-self-end"><button type="submit" class="btn btn-primary">Return
+                            Book</button></div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+</html>
