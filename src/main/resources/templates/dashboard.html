@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/index :: head}">
+</head>
+
+<body>
+
+    <!--defining the header-->
+    <header th:replace="~{layout/index :: header}">
+
+    </header>
+
+    <!--defining the sidebar and main content area-->
+    <div class="d-flex">
+
+        <!--sidebar area-->
+        <div th:replace="~{layout/index :: sidebar}">
+
+        </div>
+        <!--main content area-->
+        <div class="flex-grow-1 p-4 bg-light">
+
+            <h1>Welcome to the Library Management Dashboard</h1>
+            <p>Manage books, members, and borrowing easily.</p>
+
+            <!--card area-->
+            <div class="container">
+                <div class="row mt-4 justify-content-evenly">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <i class="fa-solid fa-book"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="card-title">Books</h5>
+                                        <p class="card-text">total books</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="card-title">Member</h5>
+                                        <p class="card-text">total member</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mt-4 justify-content-evenly">
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <i class="fa-solid fa-money-check-dollar"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="card-title">Loan</h5>
+                                        <p class="card-text">Active Loans</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="card-title">Overdue</h5>
+                                        <p class="card-text">overdue books</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

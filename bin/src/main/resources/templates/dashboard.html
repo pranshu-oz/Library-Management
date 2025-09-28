@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{index :: head}">
+</head>
+
+<body>
+
+    <!--defining the header-->
+    <header th:replace="~{index :: header}">
+
+    </header>
+
+    <!--defining the sidebar and main content area-->
+    <div class="d-flex">
+
+        <!--sidebar area-->
+        <div th:replace="~{index :: sidebar}">
+
+        </div>
+        <div class="flex-grow-1 p-4">
+
+            <h1>Welcome to the Library Management Dashboard</h1>
+            <p>Select an option from the sidebar to get started.</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
