@@ -23,7 +23,7 @@
 
     <!--defining the header-->
     <header th:fragment="header" class="header">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-light border-bottom">
             <div class="container-fluid">
                 <a class="navbar-brand text-dark" href="#">Library Management</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -48,23 +48,23 @@
     <div class="d-flex">
 
         <!--sidebar area-->
-        <div class="bg-white" style="width: 250px; min-height: 100vh;" th:fragment="sidebar">
+        <div class="bg-white border-end" style="width: 250px; min-height: 100vh;" th:fragment="sidebar">
 
             <ul class="nav flex-column p-3">
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                    <a class="nav-link" href="/dashboard"><i class="fa-solid fa-gauge-high"></i>Dashboard</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="/books">Books</a>
+                    <a class="nav-link" href="/books"><i class="fa-solid fa-book"></i>Books</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="/members">Members</a>
+                    <a class="nav-link" href="/members"><i class="fa-solid fa-book"></i>Members</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="/loans">Borrow/Return</a>
+                    <a class="nav-link" href="/loans"><i class="fa-solid fa-file-pen"></i>Borrow/Return</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="/reports">Reports</a>
+                    <a class="nav-link" href="/reports"><i class="fa-solid fa-square-poll-horizontal"></i>Reports</a>
                 </li>
             </ul>
         </div>
