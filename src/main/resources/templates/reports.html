@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/index :: head}">
+</head>
+
+<body>
+
+    <!--defining the header-->
+    <header th:replace="~{layout/index :: header}">
+
+    </header>
+
+    <!--defining the sidebar and main content area-->
+    <div class="d-flex">
+
+        <!--sidebar area-->
+        <div th:replace="~{layout/index :: sidebar}">
+
+        </div>
+        <!--main content area-->
+        <div class="flex-grow-1 p-4 bg-light">
+            <h4 class="p-3">Reports</h4>
+            <div class="container border bg-white" style="height: 325px; border-radius: 10px;">
+                <div class="row mt-4">
+                    <!--Report Tab-->
+                    <div class="col-4 container" style="height: 300px;">
+                        <h5>Generate Reports</h5>
+                        <form class="p-3">
+                            <div class="mb-3">
+                                <label for="reportType" class="form-label">Report Type</label>
+                                <select class="form-select" id="reportType">
+                                    <option value="books">Books Report</option>
+                                    <option value="members">Members Report</option>
+                                    <option value="loans">Loans Report</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Generate Report</button>
+                        </form>
+                    </div>
+
+                    <!--Report Display tab-->
+                    <div class="col-8 container" style="height: 300px">
+                        <h5>Report Preview</h5>
+                        <p>Select a report type and click "Generate Report" to view the report here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
