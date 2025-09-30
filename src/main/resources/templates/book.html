@@ -32,15 +32,15 @@
 
             <div class="container mt-4 bg-white border" style="height: 500px; border-radius: 10px;">
 
-                <form class="p-3 mt-3">
+                <form class="p-3 mt-3" th:action="@{/book}" method="get">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search books..." aria-label="Search books"
-                            aria-describedby="button-search">
-                        <button class="btn btn-outline-secondary" type="button" id="button-search"><i
+                        <input type="text" name="filter" class="form-control" placeholder="Search books name or author"
+                            aria-label="Search books" aria-describedby="button-search">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-search"><i
                                 class="fa-solid fa-search"></i></button>
                     </div>
                 </form>
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -53,20 +53,41 @@
                     </thead>
                     <tbody>
                         <tr th:each="book : ${books}">
-                            <td th:text="${book.id}">1</td>
-                            <td th:text="${book.title}">Book Title</td>
-                            <td th:text="${book.author}">Author Name</td>
-                            <td th:text="${book.isbn}">1234567890</td>
-                            <td th:text="${book.createdAt}">Copies</td>
+                            <td th:text="${book.id}"></td>
+                            <td th:text="${book.title}"></td>
+                            <td th:text="${book.author}"></td>
+                            <td th:text="${book.isbn}"></td>
+                            <td th:text="${book.createdAt}"></td>
 
                             <td>
-                                <a class="btn btn-sm-primary" th:href="@{'/books/edit/' + ${book.id}}">Edit</a>
-                                <a class="btn btn-sm-secondary" th:href="@{'/books/delete/' + ${book.id}}"
+                                <a class="btn btn-primary" th:href="@{'/book/edit/' + ${book.id}}">Edit</a>
+                                <a class="btn btn-secondary" th:href="@{'/book/delete/' + ${book.id}}"
                                     onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <!--Page No. discription-->
+                <div class="d-flex justify-content-center mt-4">
+                    <nav aria-label="Page navigation" th:if="${totalPages > 0}">
+                        <ul class="pagination">
+                            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                                <a class="page-link" th:href="@{/book(page=${currentPage - 1})}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"
+                                th:classappend="${i == currentPage} ? 'active'">
+                                <a class="page-link" th:href="@{/book(page=${i})}" th:text="${i}">1</a>
+                            </li>
+                            <li class="page-item" th:classappend="${currentPage == totalPages-1} ? 'disabled'">
+                                <a class="page-link" th:href="@{/book(page=${currentPage + 1})}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
