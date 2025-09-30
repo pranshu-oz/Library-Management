@@ -1,5 +1,6 @@
 package pranshu.library.management.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,5 +23,12 @@ public interface LoanRepository extends JpaRepository<Loans,Long> {
 			"(:search IS NULL OR t.user.name LIKE %:search% OR "+
 			":search IS NULL OR t.book.title LIKE %:search%)")
 	List<Loans> findFilteredLoan(@Param("status") Status status, @Param("search") String search);
+
+	@Query("SELECT COUNT(t) FROM Loans t")
+	long getTotalLoans();
+
+	@Query("SELECT COUNT(t) FROM Loans t WHERE "+
+			":today > t.dueDate")
+	long getTotalOverdue(@Param("today") LocalDate today);
 
 }

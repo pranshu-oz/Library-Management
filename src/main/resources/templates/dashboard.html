@@ -27,15 +27,15 @@
             <!--card area-->
             <div class="container">
                 <div class="row mt-4 justify-content-evenly">
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-1">
                                         <i class="fa-solid fa-book"></i>
                                     </div>
                                     <div class="col">
-                                        <h5 class="card-title">Books</h5>
+                                        <h5 class="card-title" th:text="${totalBooks}">Books</h5>
                                         <p class="card-text">total books</p>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -51,18 +51,14 @@
                                         <i class="fa-solid fa-users"></i>
                                     </div>
                                     <div class="col">
-                                        <h5 class="card-title">Member</h5>
+                                        <h5 class="card-title" th:text="${totalMembers}">Member</h5>
                                         <p class="card-text">total member</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                </div>
-                <div class="row mt-4 justify-content-evenly">
-
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -70,7 +66,7 @@
                                         <i class="fa-solid fa-money-check-dollar"></i>
                                     </div>
                                     <div class="col">
-                                        <h5 class="card-title">Loan</h5>
+                                        <h5 class="card-title" th:text="${totalLoans}">Loan</h5>
                                         <p class="card-text">Active Loans</p>
                                     </div>
                                 </div>
@@ -78,7 +74,7 @@
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -86,7 +82,7 @@
                                         <i class="fa-solid fa-triangle-exclamation"></i>
                                     </div>
                                     <div class="col">
-                                        <h5 class="card-title">Overdue</h5>
+                                        <h5 class="card-title" th:text="${overdue}">Overdue</h5>
                                         <p class="card-text">overdue books</p>
                                     </div>
                                 </div>
@@ -96,9 +92,21 @@
                 </div>
 
             </div>
+
+            <!--Char Management Area-->
+            <div class="d-flex mt-4" style="height: 300px;">
+
+                <div class="container border bg-white ms-2 me-3" style="height: 300px;">
+                    <canvas id="bookChart" width="400" height="300"></canvas>
+                </div>
+                <div class="container border ms-3 me-2 bg-white" style="height: 300px;">
+                    <canvas id="availableChart" width="400" height="300"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
+    <script th:src="@{/js/chart-ajax.js}"></script>
 </body>
 
 </html>

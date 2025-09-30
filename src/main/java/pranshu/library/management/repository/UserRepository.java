@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<User,Long>{
 			":filter IS NULL OR t.phone LIKE %:filter%")
 	Page<User> findAllUserByFilter(@Param("filter") String filter, Pageable pageable);
 
+	@Query("SELECT COUNT(t) FROM User t")
+	long getTotalUser();
+
 }

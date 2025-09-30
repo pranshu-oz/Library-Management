@@ -72,4 +72,15 @@ public class LoanService {
 		
 		return loan.getFineAmount();
 	}
+
+	public long getTotalLoans() {
+		
+		return loanRepository.getTotalLoans();
+	}
+
+	public long getTotalOverdue() {
+		
+		LocalDate today=LocalDate.now();
+		return loanRepository.getTotalOverdue(today);
+	}
 }

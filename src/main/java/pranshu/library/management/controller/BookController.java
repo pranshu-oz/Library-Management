@@ -62,7 +62,7 @@ public class BookController {
 		bookService.saveNewBook(book);
 		redirect.addFlashAttribute("success","New book has been registered");
 		
-		return "book";
+		return "redirect:/book";
 	}
 	
 	@GetMapping("/edit/{id}")
