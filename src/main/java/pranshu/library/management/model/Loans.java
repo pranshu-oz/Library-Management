@@ -36,7 +36,6 @@ public class Loans {
 	private LocalDate issueDate;
 	
 	@Column(updatable=false)
-	@NotNull
 	private LocalDate dueDate;
 	
 	private LocalDate returnDate;

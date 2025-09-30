@@ -20,29 +20,59 @@
         </div>
         <!--main content area-->
         <div class="flex-grow-1 p-4 bg-light">
-            <h4 class="p-3">Borrow</h4>
+            <div class="row justify-items-evenly">
+                <h4 class="p-3 col-3">Borrow</h4>
+                <div th:if="${success}" class="alert alert-success col" role="alert" th:text="${success}">
+                </div>
+            </div>
             <div class="container border bg-white" style="height: 325px; border-radius: 10px;">
                 <div class="row mt-4">
                     <!--Borrow Tab-->
                     <div class="col-4 container" style="height: 300px;">
                         <h5>Borrow</h5>
-                        <form class="p-3">
+                        <form class="p-3" th:action="@{/loans/add}" method="post" th:object="${loans}">
                             <div class="mb-3">
-                                <label for="memberId" class="form-label">Member ID</label>
-                                <input type="text" class="form-control" id="memberId" placeholder="Enter Member ID">
+                                <label for="userId" class="form-label">Member ID</label>
+                                <select class="form-select" id="userId" th:field="*{user}" required>
+                                    <option value="" selected>Select Member ID</option>
+                                    <option th:each="u: ${users}" th:value="${u.id}" th:text="${u.name}"></option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="bookId" class="form-label">Book ID</label>
-                                <input type="text" class="form-control" id="bookId" placeholder="Enter Book ID">
+                                <select class="form-select" id="bookId" th:field="*{book}">
+                                    <option value="" selected>Select Book ID</option>
+                                    <option th:each="book: ${books}" th:value="${book.id}" th:text="${book.title}">202
+                                    </option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Borrow Book</button>
                         </form>
                     </div>
 
                     <!--Active Loan tab-->
-                    <div class="col-8 container" style="height: 300px">
-                        <h5>Active Loan</h5>
-                        <table class="table table-striped">
+                    <div class="col-8 container overflow-auto" style="height: 300px">
+                        <div class="row">
+                            <h5 class="col-3">Active Loan</h5>
+                            <!--Filter for loan table-->
+                            <div class="col">
+                                <form th:action="@{/loans}" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search by User or Book"
+                                            name="search" th:value="${search}">
+                                        <select class="form-select" name="status">
+                                            <option value="">All Status</option>
+                                            <option value="Borrowed" th:selected="${status == 'Borrowed'}">BORROWED
+                                            </option>
+                                            <option value="Returned" th:selected="${status == 'Returned'}">RETURNED
+                                            </option>
+                                        </select>
+                                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-responsive text-center align-middle table-hover">
                             <thead>
                                 <tr>
                                     <th>Loan ID</th>
@@ -53,13 +83,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>101</td>
-                                    <td>202</td>
-                                    <td>2024-06-01</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-success">Return</button>
+                                <tr th:each="loan : ${loansList}">
+                                    <td th:text="${loan.id}"></td>
+                                    <td th:text="${loan.user.name}"></td>
+                                    <td th:text="${loan.book.title}"></td>
+                                    <td th:text="${loan.issueDate}"></td>
+                                    <td th:text="${loan.status}">
                                     </td>
                                 </tr>
                                 <!-- More rows as needed -->
@@ -69,11 +98,12 @@
                 </div>
             </div>
             <h4 class="m-3">Return</h4>
-            <form class="p-3">
+            <form class="p-3" th:action="@{/loans/return}" method="post" th:object="${loans}">
                 <div class="mb-3 row">
                     <div class="col">
                         <label for="returnLoanId" class="form-label">Loan Id</label>
-                        <input type="text" class="form-control" id="returnLoanId" placeholder="Enter Loan ID">
+                        <input type="text" class="form-control" id="returnLoanId" th:field="*{id}"
+                            placeholder="Enter Loan Id" required>
                     </div>
                     <div class="col align-self-end"><button type="submit" class="btn btn-primary">Return
                             Book</button></div>
