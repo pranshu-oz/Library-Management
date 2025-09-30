@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,4 +60,39 @@ public class UserController {
 		redirect.addFlashAttribute("success", "New User Has been Added");
 		return "redirect:/user";
 	}
+	
+	@GetMapping("/edit/{id}")
+	public String editExistingUser(@PathVariable("id") long id,Model model) {
+		
+		User user=userService.findUserById(id);
+		model.addAttribute("users", user);
+		model.addAttribute("activePage", "user");
+		return "edit-member";
+	}
+	
+	@PostMapping("/edit")
+	public String editExistingUser(@Valid @ModelAttribute("users") User user, BindingResult result, RedirectAttributes redirect) {
+		
+		if(result.hasErrors()) {
+			System.out.println("Error :"+result.getAllErrors());
+		}
+		userService.saveNewUser(user);
+		redirect.addFlashAttribute("success","User has updated..........");
+		return "redirect:/user";
+	}
+	
+	@GetMapping("/delete/{id}")
+	public String deleteUser(@PathVariable("id") long id, RedirectAttributes redirect) {
+		
+		userService.deleteUserById(id);
+		redirect.addFlashAttribute("success", "User has deleted from database");
+		return "redirect:/user";
+	}
+	
+	
+	
+	
+	
+	
+	
 }

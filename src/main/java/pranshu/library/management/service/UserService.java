@@ -26,4 +26,14 @@ public class UserService {
 		return userRepository.findAllUserByFilter(filter,pageable);
 	}
 
+	public User findUserById(long id) {
+		
+		return userRepository.findById(id).orElse(null);
+	}
+
+	public void deleteUserById(long id) {
+	
+		userRepository.deleteById(id);
+	}
+
 }
