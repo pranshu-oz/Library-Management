@@ -34,7 +34,7 @@ public class User {
 	@NotNull
 	private String phone;
 	
-	@Column(columnDefinition="VARCHAR(50) DEFAULT REGULAR")
+	@Column(columnDefinition="VARCHAR(50) DEFAULT 'REGULAR'")
 	private String membershipType;
 
 	@CreationTimestamp
