@@ -27,7 +27,7 @@
 
             <div th:if="${success}" class="alert alert-success" role="alert" th:text="${success}"></div>
 
-            <div class="container mt-4 bg-white border" style="height: 500px; border-radius: 10px;">
+            <div class="container mt-4 bg-white border" style="border-radius: 10px;">
 
                 <!--Search Bar define here-->
                 <form class="p-3 mt-3" th:action="@{/user}" method="get">
@@ -76,7 +76,7 @@
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"
+                            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages-1)}"
                                 th:classappend="${i == currentPage} ? 'active'">
                                 <a class="page-link" th:href="@{/user(page=${i})}" th:text="${i}">1</a>
                             </li>
