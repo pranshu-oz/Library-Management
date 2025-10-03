@@ -31,8 +31,10 @@ public interface BookRepository extends JpaRepository<Book,Long> {
 			"ORDER BY t.issueDate")
 	List<Object[]> getCurrentWeekStats(@Param("startOfWeek") LocalDate startOfWeek, @Param("endOfWeek") LocalDate endOfWeek, @Param("status") Status status);
 
-	@Query("SELECT t.title, "+
-			"t.availableCopy FROM Book t")
+	@Query("SELECT b.bookCategory.category, COUNT(b.id) "+
+			"FROM Book b "+
+			"GROUP BY b.bookCategory.id, b.bookCategory.category "+
+			"ORDER BY b.bookCategory.category")
 	List<Object[]>getAvailableStats();
 
 }

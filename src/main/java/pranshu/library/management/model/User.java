@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name="user")
+@Table(name="member")
 public class User {
 	
 	public User() {
@@ -34,7 +34,7 @@ public class User {
 	@NotNull
 	private String phone;
 	
-	@Column(columnDefinition="VARCHAR(50) DEFAULT 'REGULAR'")
+	@Column(columnDefinition="VARCHAR(50) DEFAULT 'Regular'")
 	private String membershipType;
 
 	@CreationTimestamp

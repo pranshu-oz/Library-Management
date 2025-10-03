@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import pranshu.library.management.model.Book;
+import pranshu.library.management.repository.BookCategoryRepository;
 import pranshu.library.management.repository.BookRepository;
 import pranshu.library.management.service.BookService;
 
@@ -32,6 +33,9 @@ public class BookController {
 	
 	@Autowired
 	BookRepository bookRepository;
+	
+	@Autowired 
+	BookCategoryRepository bookCategoryRepository;
 
 	@GetMapping("")
 	public String showBooks(@RequestParam(defaultValue="0") int page,
@@ -51,6 +55,7 @@ public class BookController {
 	@GetMapping("/add")
 	public String showAddBook(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", bookCategoryRepository.findAll());
 		model.addAttribute("activePage","book");
 		return "add-book";
 	}

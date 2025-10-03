@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,9 +37,6 @@ public class Book {
 	private long isbn;
 	
 	@NotNull
-	private String category;
-	
-	@NotNull
 	private long availableCopy;
 	
 	@NotNull
@@ -48,6 +46,17 @@ public class Book {
 	@CreationTimestamp
 	@Column(updatable=false)
 	private LocalDate createdAt;
+
+	@ManyToOne
+	private BookCategory bookCategory;
+	
+	public BookCategory getBookCategory() {
+		return bookCategory;
+	}
+
+	public void setBookCategory(BookCategory bookCategory) {
+		this.bookCategory = bookCategory;
+	}
 
 	public long getId() {
 		return id;
@@ -79,14 +88,6 @@ public class Book {
 
 	public void setIsbn(long isbn) {
 		this.isbn = isbn;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
 	}
 
 	public long getAvailableCopy() {

@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 
 import jakarta.validation.Valid;
 import pranshu.library.management.model.Book;
+import pranshu.library.management.model.BookCategory;
 import pranshu.library.management.model.Loans.Status;
 import pranshu.library.management.model.User;
+import pranshu.library.management.repository.BookCategoryRepository;
 import pranshu.library.management.repository.BookRepository;
 
 @Service
@@ -23,6 +25,9 @@ public class BookService {
 
 	@Autowired
 	BookRepository bookRepository;
+	
+	@Autowired
+	BookCategoryRepository bookCategoryRepository;
 	
 	public void saveNewBook(Book book) {
 		book.setAvailableCopy(book.getTotalCopy());
@@ -102,6 +107,24 @@ public class BookService {
 		HashMap<String,List<Object>> map=new HashMap();
 		map.put("title", titles);
 		map.put("copy", copy);
+		return map;
+	}
+
+	public Map<String, List<Object>> getTotalBookCategory() {
+
+		List<BookCategory> result=bookCategoryRepository.findAll();
+		ArrayList<Object> category=new ArrayList();
+		ArrayList<Object> value=new ArrayList();
+		
+		for(BookCategory r : result) {
+			category.add(r.getCategory());
+			value.add(1);
+		}
+		
+		Map<String,List<Object>> map=new HashMap();
+		map.put("title", category);
+		map.put("value", value);
+		
 		return map;
 	}
 

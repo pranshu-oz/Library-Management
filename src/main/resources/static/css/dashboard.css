@@ -27,3 +27,12 @@
 .nav-link.active i {
     color: white;
 }
+
+.bar-chart {
+    height: 300px;
+}
+
+.circle-chart>div>canvas {
+    height: 300px;
+    width: 358px;
+}

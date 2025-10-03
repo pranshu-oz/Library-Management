@@ -6,7 +6,7 @@ function ajaxCallForChartData() {
         .then(res => res.json())
         .then(data => {
             var bookChart = new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: data.days,
                     datasets: [{
@@ -49,9 +49,9 @@ function ajaxCallForChartData() {
                         data: data.copy,
                         borderWidth: 1,
                         borderRadius: 5,
-                        barThickness: 40,
+                        barThickness: 30,
                         maxBarThickness: 50,
-                        pointStryle: 'circle'
+                        pointStryle: 'circle',
                     }]
                 },
                 options: {
@@ -68,6 +68,101 @@ function ajaxCallForChartData() {
                     }
                 }
             });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+    fetch('/book/category')
+        .then(res => res.json())
+        .then(data => {
+            const ctx3 = document.getElementById('pieChart').getContext('2d');
+            var pieChart = new Chart(ctx3, {
+                type: 'pie',
+                data: {
+                    labels: data.title,
+                    datasets: [{
+                        label: 'Book Categories',
+                        data: data.value,
+                        borderWidth: 1,
+                        borderRadius: 5,
+                        pointStryle: 'circle',
+                        hoverOffset: 30,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true
+                        },
+                        title: {
+                            display: true,
+                            text: 'Book Categories',
+                            font: { size: 18 }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+    fetch('/library/total-user')
+        .then(res => res.json())
+        .then(data => {
+
+            var dougnetChart = new Chart(document.getElementById('dougnetChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: data.member,
+                    datasets: [{
+                        label: 'Library Stats',
+                        data: data.user,
+                        borderWidth: 1,
+                        borderRadius: 5,
+                        pointStryle: 'circle',
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)'
+                        ],
+                        hoverOffset: 30
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Library Users',
+                            font: { size: 18 }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
         })
         .catch(error => console.error('Error fetching data:', error));
 }

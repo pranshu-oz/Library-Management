@@ -1,5 +1,7 @@
 package pranshu.library.management.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,5 +22,11 @@ public interface UserRepository extends JpaRepository<User,Long>{
 
 	@Query("SELECT COUNT(t) FROM User t")
 	long getTotalUser();
+
+	@Query("SELECT t.membershipType, COUNT(t.id) "+
+			"FROM User t "+
+			"GROUP BY t.membershipType "+
+			"ORDER BY t.membershipType")
+	List<Object[]> getTotalUserByMemberShip();
 
 }

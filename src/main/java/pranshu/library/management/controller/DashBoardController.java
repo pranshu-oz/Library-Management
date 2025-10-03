@@ -26,6 +26,8 @@ public class DashBoardController {
 	@Autowired 
 	LoanService loanService;
 	
+	Map<String,List<Object>> map;
+	
 	@GetMapping("")
 	public String getDashBoard(Model model) {
 		
@@ -41,7 +43,6 @@ public class DashBoardController {
 	@GetMapping("/book/week-stats")
 	public ResponseEntity<Map<String,List<Object>>> getWeeklyStats() {
 		
-		Map<String,List<Object>> map=new HashMap<>();
 		map=bookService.getCurrentWeekStats();
 		return ResponseEntity.ok(map);
 	}
@@ -49,9 +50,26 @@ public class DashBoardController {
 	@GetMapping("/book/available-stats")
 	public ResponseEntity<Map<String,List<Object>>> getAvailableStats(){
 		
-		Map<String,List<Object>> map=new HashMap<>();
+		
 		map=bookService.getAvailableStats();
 		return ResponseEntity.ok(map);
 	}
-
+	
+	@GetMapping("/book/category")
+	public ResponseEntity<Map<String,List<Object>>> getTotalBookCategory(){
+		
+		map=bookService.getTotalBookCategory();
+		
+		return ResponseEntity.ok(map);
+	}
+	
+	
+	@GetMapping("library/total-user")
+	public ResponseEntity<Map<String,List<Object>>> getTotalUserByMemberShip(){
+		
+		map=userService.getTotalUserByMemberShip();
+		
+		return ResponseEntity.ok(map);
+	}
+	
 }

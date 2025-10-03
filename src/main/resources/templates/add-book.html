@@ -45,9 +45,12 @@
                             placeholder="Enter ISBN number" required>
                     </div>
                     <div class="mb-3">
-                        <label for="category" class="form-label">Category</label>
-                        <input type="text" th:field="*{category}" class="form-control" id="category"
-                            placeholder="Enter Category" required>
+                        <label for="bookCategory" class="form-label">Category</label>
+                        <select id="bookCategory" th:field="*{bookCategory}">
+                            <option value="">Select Booke Category</option>
+                            <option th:each="cat :${Categories}" th:value="${cat.category}" th:text="${cat.category}">
+                            </option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="copies" class="form-label">Copies</label>

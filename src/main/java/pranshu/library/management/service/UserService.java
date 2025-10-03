@@ -1,6 +1,9 @@
 package pranshu.library.management.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,6 +49,23 @@ public class UserService {
 	public long getTotalUsers() {
 	
 		return userRepository.getTotalUser();
+	}
+
+	public Map<String, List<Object>> getTotalUserByMemberShip() {
+		List<Object[]> result=userRepository.getTotalUserByMemberShip();
+		
+		ArrayList<Object> member=new ArrayList();
+		ArrayList<Object> user=new ArrayList();
+		
+		for(Object[] r : result) {
+			member.add(r[0]);
+			user.add(r[1]);
+		}
+		
+		Map<String,List<Object>> map= new HashMap();
+		map.put("member", member);
+		map.put("user", user);
+		return map;
 	}
 
 }
