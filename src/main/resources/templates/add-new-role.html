@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/index :: head">
+</head>
+
+<body>
+    <header th:replace="layout/index :: header">
+
+    </header>
+
+    <div class="d-flex">
+
+        <!--sidebar area-->
+        <div th:replace="~{layout/index :: sidebar}">
+
+        </div>
+        <!--main content area-->
+        <div class="flex-grow-1 p-4 bg-light">
+
+            <div class="row justify-content-overlay">
+                <h2 class="col">Add New Role</h2>
+                <a class="btn btn-outline-primary mb-3 col-3" th:href="@{/roles}">Back to Roles</a>
+            </div>
+
+            <div th:if="${success}" class="alert alert-success" role="alert" th:text="${success}"></div>
+
+            <div class="container mt-4 bg-white border" style="border-radius: 10px;">
+
+                <form th:action="@{/edit/user}" th:object="${roles}" method="post" class="p-4">
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Username :</label>
+                        <input type="text" class="form-control" id="name" th:field="*{username}" name="name"
+                            placeholder="Enter user name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Password :</label>
+                        <input type="password" class="form-control" id="description" th:field="*{password}"
+                            name="description" placeholder="Enter Password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role :</label>
+                        <input type="text" class="form-control" placeholder="Enter Roles" th:field="*{roles}">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Role</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

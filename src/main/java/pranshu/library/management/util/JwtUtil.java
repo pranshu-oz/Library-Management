@@ -2,6 +2,8 @@ package pranshu.library.management.util;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -11,13 +13,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtil {
 
-	private final String SECRET="%&kl33d9l#@m&$S$&*(dkowenv$#%^^%";
 	
-	private final long EXPIRATION= 1000*60;
+	private final String SECRET="TaK+HaV^uvCHEFsEVfypW#7g9^k*Z8$V";
+	
+	private final long EXPIRATION= 1000*60*60;
 	
 	private Key getKey() {
 		return Keys.hmacShaKeyFor(SECRET.getBytes());
 	}
+	
+	
 	
 	public String generateToken(String username) {
 	

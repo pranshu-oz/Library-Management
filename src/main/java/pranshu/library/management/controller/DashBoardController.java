@@ -7,9 +7,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,24 +32,18 @@ public class DashBoardController {
 	@Autowired 
 	LoanService loanService;
 	
-	@Autowired
-	JwtUtil jwtUtil;
-	
+		
 	Map<String,List<Object>> map;
-
-	private String token;
-
-	private String username;
 	
 	@GetMapping("/dashboard")
 	public String getDashBoard(Model model) {
 		
+		String username=SecurityContextHolder.getContext().getAuthentication().getName();
 		model.addAttribute("totalMembers", userService.getTotalUsers());
 		model.addAttribute("totalBooks", bookService.getTotalBooks());
 		model.addAttribute("totalLoans", loanService.getTotalLoans());
+		model.addAttribute("user", username);
 		model.addAttribute("overdue", loanService.getTotalOverdue());
-		model.addAttribute("username", username);
-		model.addAttribute("token", token);
 		model.addAttribute("activePage", "dashboard");
 		return "dashboard";
 	}
@@ -76,11 +72,6 @@ public class DashBoardController {
 		return ResponseEntity.ok(map);
 	}
 	
-	@GetMapping("/time")
-	public ResponseEntity<Date> getTime(){
-		
-		return ResponseEntity.ok(jwtUtil.getExpireTime(token));
-	}
 	
 	
 	@GetMapping("library/total-user")
@@ -91,16 +82,4 @@ public class DashBoardController {
 		return ResponseEntity.ok(map);
 	}
 	
-	@GetMapping("/login")
-	public String loginPage(){	
-		return "login";
-	}
-	
-	@GetMapping("auth/token")
-	public String authentication(@RequestParam(defaultValue="user") String username, RedirectAttributes redirect) {
-		
-		this.token=jwtUtil.generateToken(username);
-		this.username=username;
-		return "redirect:/dashboard";
-	}
 }
