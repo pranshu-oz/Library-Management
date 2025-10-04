@@ -1,6 +1,7 @@
 # Library Management System
 
-A comprehensive Library Management System built with Java and Spring Boot. This application allows users to manage books, members, loans, and generate reports through a modern web interface.
+
+A comprehensive Library Management System built with Java and Spring Boot. This application allows users to manage books, members, loans, and generate reports through a modern web interface. The system features a modern, responsive login page with external CSS and JavaScript for enhanced user experience.
 
 ## Features
 - Add, edit, and delete books
@@ -8,14 +9,15 @@ A comprehensive Library Management System built with Java and Spring Boot. This 
 - Track book loans and returns
 - Dashboard with charts and statistics
 - Generate reports
+- Responsive login page with external CSS/JS
 
 ## Technologies Used
 - Java
 - Spring Boot
 - Maven
 - Thymeleaf (for HTML templates)
-- JavaScript (AJAX for charts)
-- CSS
+- JavaScript (AJAX for charts, login page)
+- CSS (including custom login page styles)
 
 ## Project Structure
 ```
@@ -36,7 +38,7 @@ src/
       ApplicationTests.java
 ```
 
-## Getting Started
+```
 ### Prerequisites
 - Java 8+
 - Maven
@@ -58,7 +60,11 @@ src/
    ```sh
    mvn spring-boot:run
    ```
-5. Access the web interface at [http://localhost:8080](http://localhost:8080)
+5. Access the web interface at [http://localhost:8999](http://localhost:8999)
+
+## UI Highlights
+- Modern, responsive login page styled with Bootstrap and custom CSS (`login.css`)
+- Interactive login error feedback powered by JavaScript (`login.js`)
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request.
