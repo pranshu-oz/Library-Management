@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Error - Library Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+</head>
+
+<body>
+    <div class="error-card mx-auto">
+        <div class="error-title">Oops! Something went wrong.</div>
+        <div class="error-message" th:text="${message}">An unexpected error has occurred.</div>
+        <div th:if="${status}">
+            <span>Status code: <strong th:text="${status}"></strong></span>
+        </div>
+        <a th:href="@{/dashboard}" class="btn btn-home mt-4">Go to Home</a>
+    </div>
+</body>
+
+</html>
