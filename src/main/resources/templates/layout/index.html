@@ -42,7 +42,7 @@
                             <div th:text="${username}"></div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/logout">Logout</a>
+                            <a class="nav-link text-dark" th:href="@{/auth/logout}">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -78,6 +78,10 @@
                     <a class="nav-link" th:href="@{/loans/reports}"
                         th:classappend="${activePage=='reports'}?'active':''"><i
                             class="fa-solid fa-square-poll-horizontal"></i>Reports</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" th:href="@{/edit/user}" th:classappend="${activePage=='role'}?'active':''"><i
+                            class="fa-solid fa-pen"></i>Manage Roles</a>
                 </li>
             </ul>
         </div>
