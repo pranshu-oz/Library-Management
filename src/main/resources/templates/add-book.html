@@ -46,7 +46,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="bookCategory" class="form-label">Category</label>
-                        <select id="bookCategory" th:field="*{bookCategory}">
+                        <select id="bookCategory" class="form-control" th:field="*{bookCategory}">
                             <option value="">Select Booke Category</option>
                             <option th:each="cat :${Categories}" th:value="${cat.category}" th:text="${cat.category}">
                             </option>

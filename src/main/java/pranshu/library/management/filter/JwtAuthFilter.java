@@ -28,6 +28,7 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 	
 		String authHeader=request.getHeader("Authorization");
+		String accept=request.getHeader("Accept");
 		String username=null;
 		String token=null;
 		String path = request.getRequestURI();
@@ -36,6 +37,12 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 	        filterChain.doFilter(request, response);
 	        return;
 	    }
+		
+		if(accept!=null && accept.contains("text/html") && response.getStatus()==401) {
+			
+			response.sendRedirect("/login");
+		}
+		
 		
 		if(authHeader !=null && authHeader.startsWith("Bearer ")) {
 			
