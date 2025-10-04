@@ -1,5 +1,6 @@
 package pranshu.library.management.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pranshu.library.management.service.BookService;
 import pranshu.library.management.service.LoanService;
 import pranshu.library.management.service.UserService;
+import pranshu.library.management.util.JwtUtil;
 
 @Controller
 public class DashBoardController {
@@ -26,19 +30,28 @@ public class DashBoardController {
 	@Autowired 
 	LoanService loanService;
 	
-	Map<String,List<Object>> map;
+	@Autowired
+	JwtUtil jwtUtil;
 	
-	@GetMapping("")
+	Map<String,List<Object>> map;
+
+	private String token;
+
+	private String username;
+	
+	@GetMapping("/dashboard")
 	public String getDashBoard(Model model) {
 		
 		model.addAttribute("totalMembers", userService.getTotalUsers());
 		model.addAttribute("totalBooks", bookService.getTotalBooks());
 		model.addAttribute("totalLoans", loanService.getTotalLoans());
 		model.addAttribute("overdue", loanService.getTotalOverdue());
-		
+		model.addAttribute("username", username);
+		model.addAttribute("token", token);
 		model.addAttribute("activePage", "dashboard");
 		return "dashboard";
 	}
+	
 	
 	@GetMapping("/book/week-stats")
 	public ResponseEntity<Map<String,List<Object>>> getWeeklyStats() {
@@ -63,6 +76,12 @@ public class DashBoardController {
 		return ResponseEntity.ok(map);
 	}
 	
+	@GetMapping("/time")
+	public ResponseEntity<Date> getTime(){
+		
+		return ResponseEntity.ok(jwtUtil.getExpireTime(token));
+	}
+	
 	
 	@GetMapping("library/total-user")
 	public ResponseEntity<Map<String,List<Object>>> getTotalUserByMemberShip(){
@@ -72,4 +91,16 @@ public class DashBoardController {
 		return ResponseEntity.ok(map);
 	}
 	
+	@GetMapping("/login")
+	public String loginPage(){	
+		return "login";
+	}
+	
+	@GetMapping("auth/token")
+	public String authentication(@RequestParam(defaultValue="user") String username, RedirectAttributes redirect) {
+		
+		this.token=jwtUtil.generateToken(username);
+		this.username=username;
+		return "redirect:/dashboard";
+	}
 }

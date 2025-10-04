@@ -39,6 +39,9 @@
                             <a class="nav-link text-dark" href="/profile"><i class="fa-solid fa-circle-user"></i></a>
                         </li>
                         <li class="nav-item">
+                            <div th:text="${username}"></div>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" href="/logout">Logout</a>
                         </li>
                     </ul>
@@ -55,7 +58,8 @@
 
             <ul class="nav flex-column mt-5">
                 <li class="nav-item mb-2">
-                    <a class="nav-link" th:href="@{/}" th:classappend="${activePage=='dashboard'}?'active':''"><i
+                    <a class="nav-link" th:href="@{/dashboard}"
+                        th:classappend="${activePage=='dashboard'}?'active':''"><i
                             class="fa-solid fa-gauge-high"></i>Dashboard</a>
                 </li>
                 <li class="nav-item mb-2">
