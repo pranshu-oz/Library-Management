@@ -14,7 +14,7 @@ FROM eclipse-temurin:17-alpine
 WORKDIR /app
 
 # Copy only the built JAR from the previous stage
-COPY --from=build /app/target/library-management-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/library.management-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose port
 EXPOSE 8080
