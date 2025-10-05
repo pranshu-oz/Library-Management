@@ -6,11 +6,13 @@
     <title>Login - Library Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/login.css}" href="/css/login.css">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 
 <body>
     <div class="login-card mx-auto">
+        <div th:if="${success}" class="aler alert-danger mb-3 align-items-center" role="alert" th:text="${success}">
+        </div>
         <h2 class="login-title text-center">Library Login</h2>
         <form th:action="@{/login}" th:object="${roles}" method="post">
             <div class="form-group">
@@ -28,8 +30,12 @@
                 Invalid username or password.
             </div>
         </form>
+        <div class="text-center mt-3">
+            <span>Don't have an account?</span>
+            <a th:href="@{/register}">Register here</a>
+        </div>
     </div>
-    <script th:src="@{/js/login.js}" src="/js/login.js"></script>
+    <script th:src="@{/js/login.js}"></script>
 </body>
 
 </html>

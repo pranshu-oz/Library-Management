@@ -41,7 +41,7 @@ public class AuthenticationController {
 	
 
 	
-	@PostMapping("/edit/user")
+	@PostMapping("/register")
 	public String loginPage(@Valid @ModelAttribute("roles") RoleManager roleManager,
 							BindingResult result, RedirectAttributes redirect){	
 
@@ -51,11 +51,11 @@ public class AuthenticationController {
 		roleManagerService.saveNewUser(roleManager);
 		redirect.addFlashAttribute("success", "user saved");
 		
-		return "add-new-role";
+		return "redirect:/login";
 		
 	}
 	
-	@GetMapping("/edit/user")
+	@GetMapping("/register")
 	public String newRole(Model model) {
 		
 		model.addAttribute("roles", new RoleManager());

@@ -1,58 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layout/index :: head">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Library Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 
 <body>
-    <header th:replace="layout/index :: header">
-
-    </header>
-
-    <div class="d-flex">
-
-        <!--sidebar area-->
-        <div th:replace="~{layout/index :: sidebar}">
-
-        </div>
-        <!--main content area-->
-        <div class="flex-grow-1 p-4 bg-light">
-
-            <div class="row justify-content-overlay">
-                <h2 class="col">Add New Role</h2>
-                <a class="btn btn-outline-primary mb-3 col-3" th:href="@{/roles}">Back to Roles</a>
+    <div class="login-card mx-auto">
+        <h2 class="login-title text-center">User Resistration</h2>
+        <form th:action="@{/register}" th:object="${roles}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" th:field="*{username}" name="username" required
+                    autofocus placeholder="Enter your username">
             </div>
-
-            <div th:if="${success}" class="alert alert-success" role="alert" th:text="${success}"></div>
-
-            <div class="container mt-4 bg-white border" style="border-radius: 10px;">
-
-                <form th:action="@{/edit/user}" th:object="${roles}" method="post" class="p-4">
-
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Username :</label>
-                        <input type="text" class="form-control" id="name" th:field="*{username}" name="name"
-                            placeholder="Enter user name" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Password :</label>
-                        <input type="password" class="form-control" id="description" th:field="*{password}"
-                            name="description" placeholder="Enter Password" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="role" class="form-label">Role :</label>
-                        <input type="text" class="form-control" placeholder="Enter Roles" th:field="*{roles}">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Add Role</button>
-                </form>
-
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" th:field="*{password}" id="password" name="password"
+                    required placeholder="Enter your password">
             </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <div th:if="${param.error}" class="alert alert-danger mt-3" role="alert">
+                Invalid username or password.
+            </div>
+        </form>
+        <div class="text-center mt-3">
+            <span>Already have an account?</span>
+            <a th:href="@{/login}">Login here</a>
         </div>
     </div>
-
+    <script th:src="@{/js/login.js}"></script>
 </body>
 
 </html>

@@ -1,0 +1,39 @@
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #11bfcb 0%, #1ef570 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(19, 19, 48, 0.15);
+    padding: 2.5rem 2rem;
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-title {
+    font-weight: 700;
+    color: #d42491;
+    margin-bottom: 1.5rem;
+}
+
+.form-control:focus {
+    border-color: #fc25ea;
+    box-shadow: 0 0 0 0.2rem rgba(252, 37, 234, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #11bfcb 0%, #1ef570 100%);
+    border: none;
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .login-card {
+        padding: 2rem 1rem;
+    }
+}
