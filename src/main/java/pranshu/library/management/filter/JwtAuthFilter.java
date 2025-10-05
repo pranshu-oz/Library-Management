@@ -1,10 +1,6 @@
 package pranshu.library.management.filter;
 
 import java.io.IOException;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -28,7 +24,6 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 	
 		String authHeader=request.getHeader("Authorization");
-		String accept=request.getHeader("Accept");
 		String username=null;
 		String token=null;
 		String path = request.getRequestURI();
@@ -37,12 +32,6 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 	        filterChain.doFilter(request, response);
 	        return;
 	    }
-		
-		if(accept!=null && accept.contains("text/html") && response.getStatus()==401) {
-			
-			response.sendRedirect("/login");
-		}
-		
 		
 		if(authHeader !=null && authHeader.startsWith("Bearer ")) {
 			
@@ -66,6 +55,8 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 				
 				SecurityContextHolder.getContext().setAuthentication(auth);
 			}
+		}else {
+			response.sendRedirect("/login");
 		}
 		
 		filterChain.doFilter(request, response);

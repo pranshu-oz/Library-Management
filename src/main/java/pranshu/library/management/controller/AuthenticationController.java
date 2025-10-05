@@ -69,6 +69,13 @@ public class AuthenticationController {
 		return "login";
 	}
 	
+	@GetMapping("/")
+	public String indexLogin(Model model) {
+		
+		model.addAttribute("roles", new RoleManager());
+		return "login";
+	}
+	
 	@PostMapping("/login")
 	public String authentication(@ModelAttribute("roles") RoleManager roles, 
 								RedirectAttributes redirect,
