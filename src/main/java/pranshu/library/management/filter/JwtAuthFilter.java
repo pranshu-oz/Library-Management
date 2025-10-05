@@ -29,7 +29,7 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 		String path = request.getRequestURI();
 		
 		if (path.startsWith("/login") || path.startsWith("/register")
-				|| path.startsWith("/css") || path.startsWith("/js") || path.startsWith("/")) {
+				|| path.startsWith("/css") || path.startsWith("/js")) {
 	        filterChain.doFilter(request, response);
 	        return;
 	    }
@@ -47,7 +47,6 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 	            }
 	        }
 	    }
-		
 		if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null) {
 			
 			if(jwtUtil.validateToken(token, username)) {
@@ -56,8 +55,6 @@ public class JwtAuthFilter extends OncePerRequestFilter{
 				
 				SecurityContextHolder.getContext().setAuthentication(auth);
 			}
-		}else {
-			response.sendRedirect("/login");
 		}
 		
 		filterChain.doFilter(request, response);
