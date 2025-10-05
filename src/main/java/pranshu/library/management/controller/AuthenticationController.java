@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -97,7 +98,10 @@ public class AuthenticationController {
 	    response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 		
 		return "redirect:/dashboard";
-		}catch(AuthenticationException e) {return "Invalid Credential";}
+		}catch(AuthenticationException e) {
+			redirect.addFlashAttribute("paramError", "Invalid Credential");
+			return "redirect:/login";
+			}
 		
 	}
 	
@@ -113,9 +117,24 @@ public class AuthenticationController {
 		response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 		return "redirect:/login";
 	}
+
+	@GetMapping("/all-role-users")
+	public String getAllUsers(Model model) {
+		
+		model.addAttribute("roles", roleManagerService.findAllUsers());
+		model.addAttribute("activePage", "roles");
+		return "role-user";
+	}
 	
-	
-	
+	@GetMapping("/delete/user/role/{id}")
+	public String getAllUsers(@PathVariable("id") long id, Model model) {
+		
+		roleManagerService.deleteUserById(id);
+		model.addAttribute("success", "users got deleted");
+		model.addAttribute("roles", roleManagerService.findAllUsers());
+		model.addAttribute("activePage", "roles");
+		return "role-user";
+	}
 	
 	
 }

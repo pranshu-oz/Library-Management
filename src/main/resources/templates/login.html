@@ -26,7 +26,7 @@
                     required placeholder="Enter your password">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
-            <div th:if="${param.error}" class="alert alert-danger mt-3" role="alert">
+            <div th:if="${paramError}" class="alert alert-danger mt-3" role="alert">
                 Invalid username or password.
             </div>
         </form>

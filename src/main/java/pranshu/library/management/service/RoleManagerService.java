@@ -1,5 +1,7 @@
 package pranshu.library.management.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pranshu.library.management.model.RoleManager;
@@ -23,9 +25,9 @@ public class RoleManagerService implements UserDetailsService {
 	
 	public void saveNewUser(RoleManager roleManager) {
 
+		roleManager.setRoles("User");
 		roleManager.setPassword(encode.encode(roleManager.getPassword()));
 		roleMangerRepository.save(roleManager);
-		
 	}
 
 	@Override
@@ -34,6 +36,16 @@ public class RoleManagerService implements UserDetailsService {
 		
 		return User.withUsername(roleManager.getUsername())
 				.password(roleManager.getPassword()).build();
+	}
+	
+	public List<RoleManager> findAllUsers(){
+		
+		return roleMangerRepository.findAll();
+	}
+
+	public void deleteUserById(long id) {
+		
+		roleMangerRepository.deleteById(id);
 	}
 
 }
